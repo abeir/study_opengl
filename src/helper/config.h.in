@@ -1,0 +1,8 @@
+#ifndef STUDY_OPENGL_CONFIG_H_IN_H
+#define STUDY_OPENGL_CONFIG_H_IN_H
+
+#define SRC_PATH "@DIR_SRC@"
+#define RES_PATH "@DIR_RES@"
+
+
+#endif //STUDY_OPENGL_CONFIG_H_IN_H

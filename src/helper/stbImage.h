@@ -1,0 +1,9 @@
+#ifndef STUDY_OPENGL_STB_IMAGE_H
+#define STUDY_OPENGL_STB_IMAGE_H
+
+#define STB_IMAGE_IMPLEMENTATION
+#define STB_IMAGE_STATIC
+
+#include <stb_image.h>
+
+#endif //STUDY_OPENGL_STB_IMAGE_H
