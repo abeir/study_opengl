@@ -45,7 +45,7 @@ protected:
     GLuint createVAO();
     GLuint createVBO();
 
-    GLuint createTexture(const char* filePath, bool alpha = false);
+    GLuint createTexture(const char* filePath, bool alpha = false, bool flipV = true);
 
 private:
     int width_ = 1080;

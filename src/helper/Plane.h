@@ -26,6 +26,7 @@ public:
 
     explicit Plane(const std::vector<Vertex> &vertices, const std::vector<Texture> &textures);
 
+    inline void useUBO() { useUBO_ = true; }
     void draw(Shader &shader);
 
     glm::mat4 model;
@@ -35,6 +36,7 @@ private:
     std::vector<Vertex> vertices_;
     std::vector<Texture> textures_;
     unsigned int VAO_, VBO_;
+    bool useUBO_;
 };
 
 

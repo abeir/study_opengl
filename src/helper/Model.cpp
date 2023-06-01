@@ -6,10 +6,10 @@
 #include <assimp/postprocess.h>
 
 
-Model::Model(const char *filePath) : filePath_{filePath} {
+Model::Model(const char *fullFilePath) : filePath_{fullFilePath} {
 }
 
-Model::Model(std::string filePath) : filePath_{std::move(filePath)} {
+Model::Model(std::string fullFilePath) : filePath_{std::move(fullFilePath)} {
 }
 
 

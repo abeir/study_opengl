@@ -15,12 +15,15 @@ struct aiMaterial;
 
 class Model {
 public:
-    explicit Model(const char* filePath);
-    explicit Model(std::string filePath);
+    explicit Model(const char* fullFilePath);
+    explicit Model(std::string fullFilePath);
 
     bool load();
 
     void draw(Shader &shader);
+
+    inline std::vector<Mesh>& meshes() { return meshes_; }
+    inline std::vector<Texture>& textures() { return texturesLoaded_; }
 
     inline bool hasError() { return !error_.empty(); }
     inline std::string& error() { return error_; }

@@ -2,7 +2,6 @@
 #include "helper/Helper.h"
 #include <glad/glad.h>
 
-
 namespace BoxesInternal {
 
     std::vector<Boxes::Vertex> boxesVertexVector = {
@@ -70,13 +69,14 @@ Boxes::Boxes(const std::vector<Vertex> &vertices, const std::vector<Texture> &te
     : model{1.0f}, view{1.0f}, projection{1.0f}
     , vertices_{vertices}, textures_{textures}
     , VAO_{0}, VBO_{0}
+    , useUBO_{false}
 {
     glGenVertexArrays(1, &VAO_);
     glBindVertexArray(VAO_);
 
     glGenBuffers(1, &VBO_);
     glBindBuffer(GL_ARRAY_BUFFER, VBO_);
-    glBufferData(GL_ARRAY_BUFFER, vertices_.size() * sizeof(Vertex), &vertices[0], GL_STATIC_DRAW);
+    glBufferData(GL_ARRAY_BUFFER, vertices_.size() * sizeof(Vertex), &vertices_[0], GL_STATIC_DRAW);
 
     glEnableVertexAttribArray(0);
     glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, sizeof(Vertex), nullptr);
@@ -91,8 +91,11 @@ Boxes::Boxes(const std::vector<Vertex> &vertices, const std::vector<Texture> &te
 void Boxes::draw(Shader &shader) {
     shader.bind();
     shader.setUniformMat4("model", model);
-    shader.setUniformMat4("view", view);
-    shader.setUniformMat4("projection", projection);
+    // 未使用 uniform block
+    if(!useUBO_){
+        shader.setUniformMat4("view", view);
+        shader.setUniformMat4("projection", projection);
+    }
 
     for(int i=0; i<textures_.size(); i++){
         auto &texture = textures_[i];

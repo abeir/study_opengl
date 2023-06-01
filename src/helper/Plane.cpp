@@ -1,6 +1,7 @@
 #include "Plane.h"
 #include "Helper.h"
 #include <glad/glad.h>
+#include <glm/gtc/type_ptr.hpp>
 
 namespace PlaneInternal {
 
@@ -18,7 +19,10 @@ namespace PlaneInternal {
 
 
 Plane::Plane(const std::vector<Vertex> &vertices, const std::vector<Texture> &textures)
-    : vertices_{vertices}, textures_{textures}
+    : model{1.0f}, view{1.0f}, projection{1.0f}
+    , vertices_{vertices}, textures_{textures}
+    , VAO_{0}, VBO_{0}
+    , useUBO_{false}
 {
     glGenVertexArrays(1, &VAO_);
     glBindVertexArray(VAO_);
@@ -29,17 +33,21 @@ Plane::Plane(const std::vector<Vertex> &vertices, const std::vector<Texture> &te
 
     glEnableVertexAttribArray(0);
     glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, sizeof(Vertex), nullptr);
-    glEnableVertexAttribArray(1);
-    glVertexAttribPointer(1, 2, GL_FLOAT, GL_FALSE, sizeof(Vertex), (void*) offsetof(Vertex, texCoord));
+    glEnableVertexAttribArray(2);
+    glVertexAttribPointer(2, 2, GL_FLOAT, GL_FALSE, sizeof(Vertex), (void*) offsetof(Vertex, texCoord));
 
     glBindVertexArray(0);
 }
 
+
 void Plane::draw(Shader &shader) {
     shader.bind();
     shader.setUniformMat4("model", model);
-    shader.setUniformMat4("view", view);
-    shader.setUniformMat4("projection", projection);
+    // 未使用 uniform block
+    if(!useUBO_){
+        shader.setUniformMat4("view", view);
+        shader.setUniformMat4("projection", projection);
+    }
 
     for(int i=0; i<textures_.size(); i++){
         auto &texture = textures_[i];

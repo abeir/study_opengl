@@ -139,9 +139,9 @@ GLuint Main::createProgram(GLuint vert, GLuint frag) {
 }
 
 
-GLuint Main::createTexture(const char *filePath, bool alpha) {
+GLuint Main::createTexture(const char *filePath, bool alpha, bool flipV) {
     int w, h, nrChannel;
-    stbi_set_flip_vertically_on_load(true);
+    stbi_set_flip_vertically_on_load(flipV);
 
     std::string full = Helper::inRes(filePath);
     stbi_uc* data = stbi_load(full.c_str(), &w, &h, &nrChannel, 0);

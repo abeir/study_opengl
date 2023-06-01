@@ -21,6 +21,11 @@ public:
     void setUniformVec4(const char* name, const glm::vec4 &value);
     void setUniformMat4(const char* name, const glm::mat4 &value);
 
+    unsigned int matricesBlockBinding(const char* name, unsigned int blockPoint);
+    void setMatrices(unsigned int UBO, const glm::mat4 &view, const glm::mat4 &projection);
+
+    [[nodiscard]] inline unsigned int id() const { return programId_; }
+
     inline std::string& error() { return error_; }
     inline bool hasError() { return !error_.empty(); }
 private:

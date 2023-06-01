@@ -1,8 +1,8 @@
 #include <memory>
-#include "src04/Main042.h"
+#include "src04/Main049.h"
 
 
-#define CLASS_TYPE Main042::Main042
+#define CLASS_TYPE Main049::Main049
 
 int main() {
 

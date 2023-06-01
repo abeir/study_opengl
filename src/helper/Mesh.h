@@ -30,6 +30,8 @@ public:
 
     void draw(Shader &shader);
 
+    [[nodiscard]] inline unsigned int vao() const { return VAO_; }
+
     inline std::vector<Vertex>& vertices() { return vertices_; }
     inline std::vector<unsigned int>& indices() { return indices_; }
     inline std::vector<Texture>& textures() { return textures_; }

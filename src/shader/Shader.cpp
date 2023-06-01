@@ -130,6 +130,27 @@ void Shader::setUniformMat4(const char *name, const glm::mat4 &value) {
 }
 
 
+unsigned int Shader::matricesBlockBinding(const char *name, unsigned int blockPoint) {
+    GLuint index = glGetUniformBlockIndex(programId_, name);
+    glUniformBlockBinding(programId_, index, blockPoint);
+
+    GLuint UBO;
+    glGenBuffers(1, &UBO);
+    glBindBuffer(GL_UNIFORM_BUFFER, UBO);
+    glBufferData(GL_UNIFORM_BUFFER, sizeof(glm::mat4)*2, nullptr, GL_STATIC_DRAW);
+    glBindBuffer(GL_UNIFORM_BUFFER, 0);
+
+    glBindBufferRange(GL_UNIFORM_BUFFER, blockPoint, UBO, 0, sizeof(glm::mat4)*2);
+    return UBO;
+}
+
+void Shader::setMatrices(unsigned int UBO, const glm::mat4 &view, const glm::mat4 &projection) {
+    glBindBuffer(GL_UNIFORM_BUFFER, UBO);
+    glBufferSubData(GL_UNIFORM_BUFFER, 0, sizeof(glm::mat4), glm::value_ptr(view));
+    glBufferSubData(GL_UNIFORM_BUFFER, sizeof(glm::mat4), sizeof(glm::mat4), glm::value_ptr(projection));
+    glBindBuffer(GL_UNIFORM_BUFFER, 0);
+}
+
 int Shader::getUniformLocation(const char *name) {
     for(auto &item : cache_){
         if(item.first == name){
