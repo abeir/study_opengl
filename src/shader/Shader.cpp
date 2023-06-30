@@ -58,17 +58,17 @@ Shader::Shader(const char *vertFile, const char *fragFile)
     std::string err;
     GLuint vert = Internal::createShader(GL_VERTEX_SHADER, vertFile, err);
     if(vert == 0){
-        setError(err);
+        setError("[vert] " + err);
         return;
     }
     GLuint frag = Internal::createShader(GL_FRAGMENT_SHADER, fragFile, err);
     if(frag == 0){
-        setError(err);
+        setError("[frag] " + err);
         return;
     }
     GLuint program = Internal::createProgram(vert, frag, err);
     if(program == 0){
-        setError(err);
+        setError("[prog] " + err);
         return;
     }
     programId_ = program;

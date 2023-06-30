@@ -26,6 +26,8 @@ public:
 
     virtual int exec() = 0;
 
+    virtual void beforeCreateWindow();
+
 protected:
     inline void setError(const char* err) { error_ = err; }
     inline GLFWwindow* window() { return window_; }

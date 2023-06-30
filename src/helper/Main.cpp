@@ -76,6 +76,8 @@ bool Main::createWindow(const char* title){
     glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 5);
     glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
 
+    beforeCreateWindow();
+
     window_ = glfwCreateWindow(width_, height_, title, nullptr, nullptr);
     glfwMakeContextCurrent(window_);
     glfwSetFramebufferSizeCallback(window_, framebufferSizeCallback);
@@ -179,4 +181,8 @@ GLuint Main::createVBO() {
     glGenBuffers(1, &VBO);
     glBindBuffer(GL_ARRAY_BUFFER, VBO);
     return VBO;
+}
+
+void Main::beforeCreateWindow() {
+
 }

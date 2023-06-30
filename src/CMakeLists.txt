@@ -18,6 +18,7 @@ aux_source_directory(${DIR_SRC}/src01 SRC_01_FILES)
 aux_source_directory(${DIR_SRC}/src02 SRC_02_FILES)
 aux_source_directory(${DIR_SRC}/src03 SRC_03_FILES)
 aux_source_directory(${DIR_SRC}/src04 SRC_04_FILES)
+aux_source_directory(${DIR_SRC}/src05 SRC_05_FILES)
 aux_source_directory(${DIR_SRC}/helper SRC_HELPER_FILES)
 
 add_executable(${EXEC_NAME}
@@ -27,6 +28,7 @@ add_executable(${EXEC_NAME}
         ${SRC_02_FILES}
         ${SRC_03_FILES}
         ${SRC_04_FILES}
+        ${SRC_05_FILES}
         ${SRC_HELPER_FILES}
         ${CMAKE_CURRENT_SOURCE_DIR}/main.cpp)
 
